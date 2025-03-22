@@ -4,6 +4,8 @@ import cv2
 import numpy as np
 import io
 
+from services.image_processor import image_processor
+
 # from image_processing import detect_and_label_digits
 # from services.image_service_knn import process_image as knn_image_processor 
 
@@ -12,12 +14,7 @@ app = FastAPI()
 
 @app.post("/upload/")
 async def upload_image(file: UploadFile = File(...)):
-    contents = await file.read()
-    image = cv2.imdecode(np.frombuffer(contents, np.uint8), cv2.IMREAD_COLOR)
-
-    if image is None:
-        raise HTTPException(status_code=400, detail="Invalid image file")
-
+    image = await image_processor(file)
     labeled_image = image# detect_and_label_digits(image)
 
     _, encoded_image = cv2.imencode(".png", labeled_image)
