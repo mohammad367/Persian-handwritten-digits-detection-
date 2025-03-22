@@ -12,12 +12,11 @@ app = FastAPI()
 
 @app.post("/upload/")
 async def upload_image(file: UploadFile = File(...)):
+    print('/n/nhi/n/n')
+    # labeled_image= await knn_image_processor(file)
     
-    
-    labeled_image= await knn_image_processor(file)
-    
-    _, encoded_image = cv2.imencode(".jpg", labeled_image)
-    return StreamingResponse(io.BytesIO(encoded_image.tobytes()), media_type="image/png")
+    # _, encoded_image = cv2.imencode(".jpg", labeled_image)
+    # return StreamingResponse(io.BytesIO(encoded_image.tobytes()), media_type="image/png")
 
 if __name__ == "__main__":
     import uvicorn
