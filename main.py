@@ -6,9 +6,6 @@ import io
 
 from services.image_processor import image_processor
 
-# from image_processing import detect_and_label_digits
-# from services.image_service_knn import process_image as knn_image_processor 
-
 app = FastAPI()
 
 
